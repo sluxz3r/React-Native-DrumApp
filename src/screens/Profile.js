@@ -9,7 +9,7 @@ class LoginScreen extends Component {
         user: [],
         userid: null,
         name: '',
-        ktp: '',
+        scores: '',
         email: '',
         token: '',
     };
@@ -37,8 +37,8 @@ class LoginScreen extends Component {
         AsyncStorage.getItem('name').then((value) => {
             this.setState({ name: value })
         })
-        AsyncStorage.getItem('ktp').then((value) => {
-            this.setState({ ktp: value })
+        AsyncStorage.getItem('scores').then((value) => {
+            this.setState({ scores: value })
         })
         AsyncStorage.getItem('email').then((value) => {
             this.setState({ email: value })
@@ -54,7 +54,7 @@ class LoginScreen extends Component {
             await this.props.dispatch(logout(userid));
             AsyncStorage.removeItem('userid')
             AsyncStorage.removeItem('name')
-            AsyncStorage.removeItem('ktp')
+            AsyncStorage.removeItem('scores')
             AsyncStorage.removeItem('jwtToken')
                 .then(() => {
                     this.setState({ userid: null })
@@ -70,6 +70,7 @@ class LoginScreen extends Component {
         };
         console.log("KTP", this.state.user)
         console.log("TOKEN", this.state.token)
+        console.log("SKOR", this.state.scores)
         return (
             <ScrollView>
                 <View behavior="padding"
@@ -85,8 +86,8 @@ class LoginScreen extends Component {
                         })}
                     />
                     <NavigationEvents
-                        onWillBlur={payload => AsyncStorage.getItem('ktp').then((value) => {
-                            this.setState({ ktp: value })
+                        onWillBlur={payload => AsyncStorage.getItem('scores').then((value) => {
+                            this.setState({ scores: value })
                         })}
                     />
                     <NavigationEvents

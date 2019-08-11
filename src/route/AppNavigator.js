@@ -21,9 +21,9 @@ const HomeStack = createStackNavigator(
     {
       defaultNavigationOptions: {
         headerStyle: {
-          backgroundColor: 'black',
+          backgroundColor: 'white',
         },
-        headerTintColor: 'white',
+        headerTintColor: 'black',
         title: 'HOME',
       },
     },
@@ -36,10 +36,10 @@ const HomeStack = createStackNavigator(
     {
       defaultNavigationOptions: {
         headerStyle: {
-          backgroundColor: 'black',
+          backgroundColor: 'white',
         },
-        headerTintColor: 'white',
-        title: 'LEADERBOARD',
+        headerTintColor: 'black',
+        title: 'Achievement',
       },
     }
   );
@@ -54,9 +54,9 @@ const HomeStack = createStackNavigator(
     {
       defaultNavigationOptions: {
         headerStyle: {
-          backgroundColor: 'black',
+          backgroundColor: 'white',
         },
-        headerTintColor: 'white',
+        headerTintColor: 'black',
         title: 'PROFILE',
       },
     }
@@ -65,10 +65,9 @@ const HomeStack = createStackNavigator(
   
   const switchNavigator = createBottomTabNavigator(
     {
-      
-      Home: { screen: HomeStack },
-      Leader: { screen: LeaderStack },
-      Auth: { screen: AuthStack },
+      Play: { screen: HomeStack },
+      Achievement: { screen: LeaderStack },
+      Profile: { screen: AuthStack },
       
     },
     {
@@ -77,12 +76,12 @@ const HomeStack = createStackNavigator(
           const { routeName } = navigation.state;
           let IconComponent = Ionicons;
           let iconName;
-          if (routeName === 'Home') {
-            iconName = `ios-home`;
-          } else if (routeName === 'Leader') {
-            iconName = `ios-search`;
-          } else if (routeName === 'Auth') {
-            iconName = `ios-add-circle${focused ? '' : '-outline'}`;
+          if (routeName === 'Play') {
+            iconName = `logo-game-controller-b`;
+          } else if (routeName === 'Achievement') {
+            iconName = `md-ribbon`;
+          } else if (routeName === 'Profile') {
+            iconName = `md-contact`;
           }
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
