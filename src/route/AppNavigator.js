@@ -56,9 +56,9 @@ const AuthStack = createStackNavigator(
 
 const switchNavigator = createBottomTabNavigator(
   {
-    Profile: { screen: AuthStack },
     Play: { screen: HomeStack },
     Achievement: { screen: LeaderStack },
+    Profile: { screen: AuthStack },
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
