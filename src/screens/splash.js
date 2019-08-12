@@ -12,6 +12,7 @@ export default class Splash extends Component {
     render (){
         return (
                 <LinearGradient colors={['#dbdbdb','#f0f0f0']} style={styles.linearGradient}>
+                    <StatusBar colors={'red'}/>
                     <Image source={require('../assets/icon.png')} style={styles.logoSplash}/>
                     <Text>Drum App</Text>
                 </LinearGradient>

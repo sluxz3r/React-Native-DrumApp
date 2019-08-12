@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Image, Text, TextInput, View, ImageBackground, TouchableOpacity, StyleSheet, AsyncStorage, Alert } from 'react-native';
+import { ScrollView, Image, Text, TextInput, View, ImageBackground, TouchableOpacity, StyleSheet, AsyncStorage, Alert, StatusBar } from 'react-native';
 import { NavigationEvents, withNavigation } from 'react-navigation';
 import { login, logout, getUserId } from '../redux/actions/user';
 
@@ -38,11 +38,14 @@ class LoginScreen extends Component {
         console.log(this.state.data[0])
         return (
             <ScrollView>
+                <StatusBar backgroundColor='#45cbf7' barStyle="light-content" />
                 <View behavior="padding"
                     style={styles.Wrapper}>
                     <View
                         style={styles.Wrapper}>
-                        <Text style={styles.register}>Login</Text>
+                        <View>
+                            <Image source={require('../assets/drum.png')} style={styles.logoSplash} />
+                        </View>
                         <TextInput
                             placeholder='Email'
                             underlineColorAndroid='black'
@@ -60,12 +63,11 @@ class LoginScreen extends Component {
 
 
                         <TouchableOpacity onPress={userLogin.bind(this)} style={styles.loginButton}>
-                            <Text style={{ color: 'white', fontSize: 18 }}>Login</Text>
+                            <Text style={{ color: 'white', fontSize: 18 }}>Login &#9835;</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { this.props.navigation.navigate('Register') }}>
                             <Text style={{ color: 'black', marginTop: 10 }}>Register</Text>
                         </TouchableOpacity>
-
                     </View>
                 </View>
             </ScrollView>
@@ -96,12 +98,12 @@ const styles = StyleSheet.create({
         fontSize: 23
     },
     loginButton: {
-        backgroundColor: 'black',
+        backgroundColor: '#3bc1ed',
         marginTop: 40,
-        width: 270,
+        width: 300,
         height: 40,
-        borderRadius: 8,
         elevation: 5,
+        borderRadius: 8,
         justifyContent: "center",
         alignItems: "center"
     },
@@ -166,4 +168,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    logoSplash: {
+        marginTop: 30,
+        width: 200,
+        height: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });

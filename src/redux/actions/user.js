@@ -24,12 +24,10 @@ export const login = (data) => {
             const userid = res.data.result.userid.toString();
             const fullname = res.data.result.fullname;
             const email = res.data.result.email;
-            const scores = res.data.result.scores.toString();
     
             AsyncStorage.setItem('userid', userid);
             AsyncStorage.setItem('name', fullname);
             AsyncStorage.setItem('email', email);
-            AsyncStorage.setItem('scores', scores);
             AsyncStorage.setItem('jwtToken', token);
            
         })

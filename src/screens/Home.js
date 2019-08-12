@@ -17,8 +17,6 @@ class HomeScreen extends Component {
     })
   }
   render() {
-    console.log(this.state.kick)
-    console.log(this.state.kock)
     return (
       <ScrollView>
         <View style={{flex:1}}>

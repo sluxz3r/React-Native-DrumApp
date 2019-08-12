@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Image, Text, TextInput, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 import { register } from '../redux/actions/user';
 
@@ -42,37 +42,39 @@ class RegisterScreen extends Component {
         };
         return (
             <ScrollView>
-            <View
-                behavior="padding"
-                style={styles.Wrapper}>
-                    <Text style={styles.register}>Register</Text>
-                <TextInput
-                    placeholder='Email'
-                    underlineColorAndroid='black'
-                    placeholderTextColor='black'
-                    keyboardType='email-address'
-                    style={styles.inputField}
-                    onChangeText={val => this.setState({ 'email': val })} />
-                <TextInput
-                    placeholder='Full Name'
-                    underlineColorAndroid='black'
-                    placeholderTextColor='black'
-                    style={styles.inputField}
-                    onChangeText={val => this.setState({ 'fullname': val })} />
-                <TextInput
-                    placeholder='Password'
-                    underlineColorAndroid='black'
-                    placeholderTextColor='black'
-                    secureTextEntry={true}
-                    style={styles.inputField}
-                    onChangeText={val => this.setState({ 'password': val })} />
-                <TouchableOpacity onPress={userRegister.bind(this)} style={styles.registerButton}>
-                    <Text style={{ color: 'white', fontSize: 18 }}>Register</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { this.props.navigation.navigate('Login') }}>
-                    <Text style={{ color: 'black', marginTop: 10 }}>Login</Text>
-                </TouchableOpacity>
-            </View>
+                <View
+                    behavior="padding"
+                    style={styles.Wrapper}>
+                    <View>
+                        <Image source={require('../assets/drum.png')} style={styles.logoSplash} />
+                    </View>
+                    <TextInput
+                        placeholder='Email'
+                        underlineColorAndroid='black'
+                        placeholderTextColor='black'
+                        keyboardType='email-address'
+                        style={styles.inputField}
+                        onChangeText={val => this.setState({ 'email': val })} />
+                    <TextInput
+                        placeholder='Full Name'
+                        underlineColorAndroid='black'
+                        placeholderTextColor='black'
+                        style={styles.inputField}
+                        onChangeText={val => this.setState({ 'fullname': val })} />
+                    <TextInput
+                        placeholder='Password'
+                        underlineColorAndroid='black'
+                        placeholderTextColor='black'
+                        secureTextEntry={true}
+                        style={styles.inputField}
+                        onChangeText={val => this.setState({ 'password': val })} />
+                    <TouchableOpacity onPress={userRegister.bind(this)} style={styles.registerButton}>
+                        <Text style={{ color: 'white', fontSize: 18 }}>Register &#9835;</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate('Login') }}>
+                        <Text style={{ color: 'black', marginTop: 10 }}>Login</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         )
     }
@@ -101,17 +103,24 @@ const styles = StyleSheet.create({
         fontSize: 23
     },
     registerButton: {
-        backgroundColor: 'black',
+        backgroundColor: '#3bc1ed',
         marginTop: 40,
-        width: 270,
+        width: 300,
         height: 40,
-        borderRadius: 8,
         elevation: 5,
+        borderRadius: 8,
         justifyContent: "center",
         alignItems: "center"
     },
-    register:{
-        fontSize:18,
-        padding:20
+    register: {
+        fontSize: 18,
+        padding: 20
     },
+    logoSplash: {
+        marginTop: 30,
+        width: 200,
+        height: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
