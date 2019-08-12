@@ -58,7 +58,6 @@ class LeaderScreen extends Component {
     const notLogin = data == undefined ? 0 : data;
     const name = notLogin[0] == undefined ? 0 : notLogin[0].fullname;
     const points = notLogin[0] == undefined ? 0 : notLogin[0].scores;
-    console.log(name)
     return (
       <ScrollView>
         <StatusBar backgroundColor='#45cbf7' barStyle="light-content" />

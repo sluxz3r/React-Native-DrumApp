@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
 import { StatusBar, StyleSheet, View, TextInput, Text, Image, ScrollView, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import Sound from 'react-native-sound';
+import { connect } from 'react-redux';
+import { getDrum } from '../redux/actions/drum';
+
 class HomeScreen extends Component {
-  constructor() {
-    super();
+  state = {
+    drum: []
   }
-  
-  onButtonPress() {
-    const requireAudio = require('../assets/test.wav');
-    const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release()); });
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount = async () => {
+    await this.props.dispatch(getDrum());
+    this.setState({
+      drum: this.props.drum.drumList[0],
+    });
+    this.subs = [
+      this.props.navigation.addListener('willFocus', async () => {
+        await this.props.dispatch(getDrum());
+        this.setState({
+          drum: this.props.drum.drumList[0],
+        })
+      }),
+    ]
+  };
+  kick = () => {
+    const kik = this.state.drum.kick
+    const track = new Sound(kik, null, (e) => {
+      if (e) {
+        console.log('error loading track:', e)
+      } else {
+        track.play()
+      }
+    })
   }
 
-  onButtPress() {
-    const requireAudio = require('../assets/kick2.wav');
-    const s = new Sound(requireAudio, (e) => { if (e) { console.log('Error in SOUND', e); return; } s.play(() => s.release()); });
+  snare = () => {
+    const snare = this.state.drum.snare
+    const track = new Sound(snare, null, (e) => {
+      if (e) {
+        console.log('error loading track:', e)
+      } else {
+        track.play()
+      }
+    })
   }
-  
   render() {
-    
     return (
       <ScrollView>
         <View style={{ flex: 1, }}>
@@ -36,15 +65,15 @@ class HomeScreen extends Component {
           <View style={styles.leader}>
             <View style={styles.drum1}>
               <TouchableOpacity style={styles.loginButton}
-                activeOpacity={0.2}
-                onPress={this.onButtonPress.bind(this)}>
+                activeOpacity={0.05}
+                onPress={this.snare.bind(this)}>
                 <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
               </TouchableOpacity>
             </View>
             <View style={styles.drum2}>
               <TouchableOpacity style={styles.loginButton1}
-                activeOpacity={0.4}
-                onPress={this.onButtonPress.bind(this)}>
+                activeOpacity={0.05}
+                onPress={this.snare.bind(this)}>
                 <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
               </TouchableOpacity>
             </View>
@@ -52,15 +81,15 @@ class HomeScreen extends Component {
           <View style={styles.leader}>
             <View style={styles.drum3}>
               <TouchableOpacity style={styles.pad3}
-                activeOpacity={0.4}
-                onPress={this.onButtPress.bind(this)}>
+                activeOpacity={0.05}
+                onPress={this.kick.bind(this)}>
                 <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
               </TouchableOpacity>
             </View>
             <View style={styles.drum4}>
               <TouchableOpacity style={styles.pad4}
-                activeOpacity={0.4}
-                onPress={this.onButtPress.bind(this)}>
+                activeOpacity={0.05}
+                onPress={this.kick.bind(this)}>
                 <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
               </TouchableOpacity>
             </View>
@@ -71,7 +100,13 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = state => {
+  return {
+    drum: state.drum
+  };
+};
+
+export default connect(mapStateToProps)(HomeScreen);
 const styles = StyleSheet.create({
   leader: {
     marginTop: 20,
