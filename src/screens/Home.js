@@ -9,7 +9,6 @@ import { getPola } from '../redux/actions/pola';
 class HomeScreen extends Component {
   state = {
     userId: [],
-    pola:[],
     combo: 0,
     play: false,
     score: 0,
