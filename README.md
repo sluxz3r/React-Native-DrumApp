@@ -17,6 +17,12 @@ Get the Highest scores.
 ### Released APK
 
 - If u want to test it out download [here](https://drive.google.com/file/d/1-32RCsuYK56lfKgGeawDJnp_K8GKjM_j/view) 
+
+## Thanks To Allah SWT.
+### My Bro. Bang [Tatas](https://github.com/tatasfachrul).
+-arkademy-
+### Crafted With Love
+
 <p align="center">
     <img src="https://res.cloudinary.com/dbhwvh1mf/image/upload/v1565887838/wa/WhatsApp_Image_2019-08-15_at_23.42.33_tfrpyc.jpg" width=400 align="center" style="margin-right:20px"/>
     <img src="https://res.cloudinary.com/dbhwvh1mf/image/upload/v1565887838/wa/WhatsApp_Image_2019-08-15_at_23.42.33_1_cgnj8g.jpg" width=400 align="center" style="margin-right:20px"/>
