@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {AsyncStorage} from 'react-native';
 
-const url = 'http://192.168.6.199:9090'
+const url = 'https://mydrum-app.herokuapp.com'
+// const url = 'http://192.168.6.199:8000'
 
 export const register = (data) => {
     return {

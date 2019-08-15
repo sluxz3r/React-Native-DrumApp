@@ -7,6 +7,7 @@ import { getUserId, updateScore } from '../redux/actions/userid';
 import { getPola } from '../redux/actions/pola';
 
 class HomeScreen extends Component {
+  timer;
   state = {
     userId: [],
     combo: 0,
@@ -16,10 +17,20 @@ class HomeScreen extends Component {
     isNow: 0,
     button: 1,
     userid: null,
+    showPlayerControls: true,
   }
   constructor(props) {
     super(props);
 
+  }
+  hidePlayerControls() {
+    clearTimeout(this.timer);
+    this.setState({ showPlayerControls: false, });
+  }
+  hideWithTimer() {
+    this.timer = setTimeout(() => {
+      this.hidePlayerControls()
+    }, 5000)
   }
   componentDidMount = async () => {
     await this.props.dispatch(getDrum());
@@ -57,6 +68,7 @@ class HomeScreen extends Component {
   };
 
   play = () => {
+    this.hideWithTimer();
     this.setState({
       play: true
     })
@@ -94,7 +106,8 @@ class HomeScreen extends Component {
         score: 0,
         isNow: 0,
         combo: 0,
-        play: false
+        play: false,
+        showPlayerControls: true,
       })
     }
     await this.setState({
@@ -134,7 +147,8 @@ class HomeScreen extends Component {
         score: 0,
         isNow: 0,
         combo: 0,
-        play: false
+        play: false,
+        showPlayerControls: true,
       })
     }
     await this.setState({
@@ -175,7 +189,8 @@ class HomeScreen extends Component {
         score: 0,
         isNow: 0,
         combo: 0,
-        play: false
+        play: false,
+        showPlayerControls: true,
       })
     }
     await this.setState({
@@ -216,7 +231,8 @@ class HomeScreen extends Component {
         score: 0,
         isNow: 0,
         combo: 0,
-        play: false
+        play: false,
+        showPlayerControls: true,
       })
     }
     await this.setState({
@@ -224,20 +240,27 @@ class HomeScreen extends Component {
     })
   }
   render() {
+    const Pola = `{ ${this.state.pattern} }`
     console.log(this.state.pola)
     return (
       <ScrollView>
         <View style={{ flex: 1, }}>
           <View style={{ flex: 1, alignItems: 'center', width: '100%', marginBottom: '7%' }}>
+
             <View style={styles.up}>
               <Text style={{ fontSize: 20, fontFamily: 'sans-serif-medium', color: 'white' }}>Drum Your Dream</Text>
             </View>
-            <View style={{ alignItems: 'center', marginTop: '5%', marginBottom: '2%', fontSize: 20 }}>
-              <Text>SCORE : {this.state.score}</Text>
+            {this.state.play == false ? (<Text style={{marginTop:'10%'}}></Text>):
+            (
+            <View>
+              <View style={{ alignItems: 'center', marginTop: '5%', marginBottom: '2%', fontSize: 20 }}>
+                <Text>SCORE : {this.state.score}</Text>
+              </View>
+              <View style={{ alignItems: 'center', marginTop: '2%', marginBottom: '2%' }}>
+                <Text>Combo Hits : {this.state.combo}</Text>
+              </View>
             </View>
-            <View style={{ alignItems: 'center', marginTop: '2%', marginBottom: '2%' }}>
-              <Text>Combo Hits : {this.state.combo}</Text>
-            </View>
+            )}
             <View style={styles.logoSplash}>
               <Image source={require('../assets/slank.jpg')} style={{ height: '100%', width: '100%' }} />
             </View>
@@ -249,16 +272,29 @@ class HomeScreen extends Component {
                 activeOpacity={0.05}
                 onPress={this.play.bind(this)}
               >
-                <Image source={require('../assets/tombol.gif')} style={{ height: '80%', width: '100%', borderRadius: 10 }} />
+                <Image source={require('../assets/play.png')} style={{ height: '80%', width: '100%', borderRadius: 10 }} />
+                <Text>PLAY</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.playButton} activeOpacity={1} onPress={() => { this.props.navigation.navigate('Training') }}>
+                <Image source={require('../assets/training.png')} style={{ height: '80%', width: '80%', borderRadius: 10 }} />
+                <Text>TRAINING</Text>
               </TouchableOpacity>
             </View>) :
             (<View>
+              {this.state.showPlayerControls ? (
+              <View style={{ alignItems: 'center', marginTop: '1%', marginBottom: '0%' }}>
+                <Text style={{ fontSize: 10, }}>Pattern</Text>
+                <Text style={{ fontSize: 10, }}>{Pola}</Text>
+              </View>) : null}
+
               <View style={styles.leader}>
                 <View style={styles.drum1}>
                   <TouchableOpacity style={styles.loginButton}
                     activeOpacity={0.05}
                     onPress={this.sound2.bind(this)}>
                     <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
+                    <Text style={{ fontSize: 8 }}>CRASH:2</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.drum2}>
@@ -266,6 +302,7 @@ class HomeScreen extends Component {
                     activeOpacity={0.05}
                     onPress={this.sound3.bind(this)}>
                     <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
+                    <Text style={{ fontSize: 8 }}>PERC:3</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -275,6 +312,7 @@ class HomeScreen extends Component {
                     activeOpacity={0.05}
                     onPress={this.sound1.bind(this)}>
                     <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
+                    <Text style={{ fontSize: 8 }}>KICK:1</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.drum4}>
@@ -282,6 +320,7 @@ class HomeScreen extends Component {
                     activeOpacity={0.05}
                     onPress={this.sound4.bind(this)}>
                     <Image source={require('../assets/tengkorak.png')} style={{ height: '80%', width: '60%' }} />
+                    <Text style={{ fontSize: 8 }}>SNARE:4</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -303,7 +342,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(HomeScreen);
 const styles = StyleSheet.create({
   leader: {
-    marginTop: 20,
+    marginTop: 5,
     borderRadius: 0,
     flexDirection: 'row',
     height: 120,
@@ -313,7 +352,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: 300
+    height: 300,
+    flexDirection: 'row',
   },
   drum1: {
     alignItems: 'flex-end',
@@ -344,7 +384,8 @@ const styles = StyleSheet.create({
     height: 100,
     elevation: 5,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    margin: 20
   },
   loginButton: {
     backgroundColor: '#c7c7c7',

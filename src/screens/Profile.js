@@ -30,7 +30,7 @@ class LoginScreen extends Component {
         await this.props.dispatch(getUserId(userid));
         this.setState({
             user: this.props.user,
-        })
+        });
         AsyncStorage.getItem('userid').then((value) => {
             this.setState({ userid: value })
         })
@@ -68,9 +68,6 @@ class LoginScreen extends Component {
                     );
                 })
         };
-        console.log("KTP", this.state.user)
-        console.log("TOKEN", this.state.token)
-        console.log("SKOR", this.state.scores)
         return (
             <ScrollView>
                 <View behavior="padding"
@@ -81,12 +78,12 @@ class LoginScreen extends Component {
                         })}
                     />
                     <NavigationEvents
-                        onWillBlur={payload => AsyncStorage.getItem('name').then((value) => {
+                        onWillFocus={payload => AsyncStorage.getItem('name').then((value) => {
                             this.setState({ name: value })
                         })}
                     />
                     <NavigationEvents
-                        onWillBlur={payload => AsyncStorage.getItem('scores').then((value) => {
+                        onWillFocus={payload => AsyncStorage.getItem('scores').then((value) => {
                             this.setState({ scores: value })
                         })}
                     />
@@ -102,20 +99,16 @@ class LoginScreen extends Component {
                     />
                     <View>
                         <View style={styles.container}>
-                            <ImageBackground style={styles.header} source={{ uri: 'https://www.mldspot.com/sites/default/files/styles/square/public/field/image/Ingin-Melihat-Langit-Penuh-Bintang-min.jpg' }} style={{ width: '100%', height: 200 }}></ImageBackground>
+                            <ImageBackground style={styles.header} style={{ width: '100%', height: 200 }}></ImageBackground>
                             <Image style={styles.avatar} source={require('../assets/sap.jpg')} />
                             <View style={styles.body}>
                                 <View style={styles.bodyContent}>
                                     <Text style={styles.name}>{this.state.name}</Text>
                                     <Text style={styles.info}>{this.state.email}</Text>
-                                    <Text style={styles.info}>{this.state.ktp}</Text>
+                                    <Text style={styles.info}>{this.state.scores}</Text>
                                     <Text style={styles.description}>Hidup itu seperti Ayah dan Ibu, Kadang di atas kadang di bawah</Text>
-
-                                    <TouchableOpacity style={styles.buttonContainer} onPress={this.buttonPress}>
-                                        <Text style={{ color: 'white', fontSize: 18 }}>History List</Text>
-                                    </TouchableOpacity>
                                     <TouchableOpacity onPress={del.bind(this)} style={styles.buttonContainer}>
-                                        <Text style={{ color: 'white', fontSize: 18 }}>Logout</Text>
+                                        <Text style={{ color: 'white', fontSize: 18 }}>Logout &#9835;</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -211,7 +204,7 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     buttonContainer: {
-        backgroundColor: 'black',
+        backgroundColor: '#3bc1ed',
         marginTop: 20,
         width: 270,
         height: 40,

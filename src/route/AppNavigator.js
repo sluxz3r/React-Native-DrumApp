@@ -8,6 +8,7 @@ import {
 
 import HomeScreen from '../screens/Home';
 import LeaderScreen from '../screens/LeaderBoard';
+import TrainingScreen from '../screens/training';
 
 import AuthScreen from '../screens/Auth';
 import LoginScreen from '../screens/Login';
@@ -17,6 +18,7 @@ import ProfileScreen from '../screens/Profile'
 const HomeStack = createStackNavigator(
   {
     Home: { screen: HomeScreen },
+    Training: { screen: TrainingScreen }
   },
   {
     headerMode: 'none',

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const url = 'http://192.168.6.199:9090'
-
+// const url = 'http://192.168.6.199:8000'
+const url = 'https://mydrum-app.herokuapp.com'
 
 export const getUser = () => {
     return {

@@ -54,10 +54,14 @@ class LeaderScreen extends Component {
     const data = this.props.data.dataList;
     const rank = this.state.userid == null ? 0 : data && data.indexOf(data.find((i) => this.state.name == i.fullname));
     const point = this.state.userid == null ? 0 : data && data.find((i) => this.state.name == i.fullname);
+    const img = this.state.userid == null ? 0 : data && data.find((i) => this.state.name == i.fullname);
     const score = point == undefined ? 0 : point;
+    const image = img == undefined ? 0 : img;
     const notLogin = data == undefined ? 0 : data;
     const name = notLogin[0] == undefined ? 0 : notLogin[0].fullname;
     const points = notLogin[0] == undefined ? 0 : notLogin[0].scores;
+    const images = notLogin[0] == undefined ? 0 : notLogin[0].image;
+    console.log(score)
     return (
       <ScrollView>
         <StatusBar backgroundColor='#45cbf7' barStyle="light-content" />
@@ -86,7 +90,7 @@ class LeaderScreen extends Component {
                   <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>1</Text>
                 </View>
                 <View style={styles.top}>
-                  <Image style={styles.avatar} source={{ uri: 'https://res.cloudinary.com/dbhwvh1mf/image/upload/v1565540139/wa/Ari_2385_xvmh7u.jpg' }} />
+                  <Image style={styles.avatar} source={{ uri: images }} />
                   <Text style={{ fontSize: 14, color: 'white', marginTop: 5 }}>{name}</Text>
                 </View>
                 <View style={styles.top}>
@@ -106,7 +110,7 @@ class LeaderScreen extends Component {
                   <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>{rank + 1}</Text>
                 </View>
                 <View style={styles.top}>
-                  <Image style={styles.avatar} source={{ uri: 'https://res.cloudinary.com/dbhwvh1mf/image/upload/v1565540139/wa/Ari_2385_xvmh7u.jpg' }} />
+                  <Image style={styles.avatar} source={{ uri: score.image }} />
                   <Text style={{ fontSize: 14, color: 'white', marginTop: 5 }}>{this.state.name}</Text>
                 </View>
                 <View style={styles.top}>
